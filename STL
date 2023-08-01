@@ -1,0 +1,5 @@
+unordered_map<int, B*> m;
+// remove B *b1
+for (unordered_map<int, B*>::iterator it = m.begin(); it != m.end(); ++it) {
+    if (it->second == b1) m.erase(it);
+}
