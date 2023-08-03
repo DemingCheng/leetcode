@@ -1,0 +1,22 @@
+size_t 和 unsigned int
+
+1. 两者不等价。size_t 是通过typedef定义的一些unsigned int 类型的别名。比如 unsigned char, unsigned long long
+2. 如果size_t替换为unsigned int 会降低可以执行。unsigned int 受32位 64位影响。
+
+
+There are 5 standard unsigned integer types in C:
+
+unsigned char
+unsigned short
+unsigned int
+unsigned long
+unsigned long long
+with various requirements for their sizes and ranges (briefly, each type's range is a subset of the next type's range, but some of them may have the same range).
+
+size_t is a typedef (i.e., an alias) for some unsigned type, (probably one of the above but possibly an extended unsigned integer type, though that's unlikely). It's the type yielded by the sizeof operator.
+
+On one system, it might make sense to use unsigned int to represent sizes; on another, it might make more sense to use unsigned long or unsigned long long. (size_t is unlikely to be either unsigned char or unsigned short, but that's permitted).
+
+The purpose of size_t is to relieve the programmer from having to worry about which of the predefined types is used to represent sizes.
+
+Code that assumes sizeof yields an unsigned int would not be portable. Code that assumes it yields a size_t is more likely to be portable.
