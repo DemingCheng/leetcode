@@ -1,0 +1,78 @@
+#include <assert.h>
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+// 1. strcpy
+char *mystrcpy(char *dst, const char *src) { // 1. 源字符串不能变，需要加const保证
+    assert(dst != NULL || src != NULL);      // 2. 保证指针有效
+    char *pdst = dst;                        // 3. 涉及到指针移动，保留dst的头指针用于返回
+    while((*pdst++ = *src++) != '\0');      // 4.末尾的'\0'也要复制过来, 上面先执行 *temp++ = *src++ ，再判断 *src 是否等于'\0',所以保证了'\0'先复制后判断
+    return dst;
+}
+
+// 2. strncpy
+char* mystrncpy(char *dst, const char *src, size_t n) {
+
+}
+
+// 3. strlen
+size_t mystrlen(const char* src) {
+    assert(src != NULL);
+    size_t len = 0;
+    while(*src++ != '\0') {
+        ++len;
+    }
+    return len;
+}
+
+// 4. strcat
+// 把src所指字符串添加到dest结尾处(覆盖dest结尾处的’\0’)。
+char* strcat(char* dst, const char* src) {
+    assert(dst != NULL && src != NULL);
+    char* pdst = dst;
+    while(*pdst != '\0') {  //自增放在循环里，才可以覆盖'\0'
+        ++pdst;
+    }
+    while((*pdst++ = *src++) != '\0');
+    return dst;
+}
+
+// 5. strcmp
+// 比较两个字符串。
+// 若相等，则*str1 - *str2 = '\0' - '\0' = 0，返回零；
+// 否则，*str1 - *str2 != 0;因为前面的位都相等，所以只需要比较当前位来确定返回值，则返回正数；
+
+/*不可用while(*str1++==*str2++)来比较，当不相等时仍会执行一次++，return返回的比较值实际上是下一个字符。应将++放到循环体中进行。*/
+
+int strcmp(const char* s1, const char* s2) {
+    assert(s1 != NULL && s2 != NULL);
+    while(s1 && s2 && *s1 == *s2) {           
+        ++s1;
+        ++s2;
+    }
+    return *s1 - *s2;
+}
+
+
+
+// 6. memset
+
+
+// 7. memcopy
+
+
+// 8. atoi leetcode 8
+
+
+
+int main() {
+    // char* , char src[], string
+    char src[] = "GeeksforGeeks"; // 13
+    char dst[] = "";
+    mystrcpy(dst, src);
+        cout << src[0] << endl;
+    cout << "char* strcpy(char *dst, const char* src)  " << dst << endl;
+    cout << "size_t strlen(const char* src)  " << mystrlen(src) << strlen(src) << endl;
+    return 0;
+}
