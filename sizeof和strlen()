@@ -6,18 +6,24 @@ sizeof(char*) sizeof(int*) sizeof(long*) sizeof(double*) 4字节
 char占1个字节，int占4个字节，long点4个字节，而double占8个字节。但指针char*,int*,long*,double*都占4个字节的空间。
 
 // 例子
-char *c="abcdef";
-char d[]="abcdef";
-char e[]={'a','b','c','d','e','f'};
-printf("%d%d/n",sizeof(c),strlen(c));
-printf("%d%d/n",sizeof(d),strlen(d));
-printf("%d%d/n",sizeof(e),strlen(e));
+cout << "sizeof and strlen" << endl;
+char* c = "abcdef";
+char d[] = "abcdef";
+char e[] = {'a','b','c','d','e','f'};
+cout << sizeof(c) << " " <<  strlen(c) << endl;
+cout << sizeof(d) << " " <<  strlen(d) << endl;
+cout << sizeof(e) << " " << strlen(e) << endl;
 
-输出的结果是:
+输出的结果是 地址长度32位:
 4 6
 7 6
 6 14
 
+输出的结果是 地址长度64位:
+sizeof and strlen
+8 6
+7 6
+6 12
 第一行定义c为一个字符指针变量，指向常量字符串，c里面存放的是字符串的首地址。
 第二行定义d为一个字符数组，以字符串的形式给这个字符数组赋值。
 第三行定义的也是个字符数组，以单个元素的形式赋值。
