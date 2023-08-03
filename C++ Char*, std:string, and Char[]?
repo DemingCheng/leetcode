@@ -1,0 +1,7 @@
+C++ Char*, std:string, and Char[]?
+
+来自 <https://www.scaler.com/topics/cpp-char/> 
+
+Char*		     The char* in C++ is a pointer used to point to the first character of the character array.	
+std::string  The std::string is a standard library that includes support for strings in C++.	
+Char[]       The char[] is a character array that stores all the characters in the string.
