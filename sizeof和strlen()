@@ -4,6 +4,17 @@ strlen是标准库函数，查看字符串长度、
 sizeof(char) 1 sizeof(int) 4 sizeof(long) 4 sizeof(double) 8
 sizeof(char*) sizeof(int*) sizeof(long*) sizeof(double*) 4字节
 char占1个字节，int占4个字节，long点4个字节，而double占8个字节。但指针char*,int*,long*,double*都占4个字节的空间。
+// 例子
+    char arr1[] = { 'a','b','c','b'};
+	char arr2[] = { "abcd" };
+	int arr3[10] = { 0 };
+	//arr1和arr2的区别
+	cout << sizeof(arr1) << endl;
+	cout << sizeof(arr2) << endl;
+	//整型数组长度求法
+	cout << sizeof(arr3)/sizeof(arr3[0]) << endl;
+	cout << sizeof(arr3) / sizeof(&arr3) << endl;
+
 
 // 例子
 cout << "sizeof and strlen" << endl;
