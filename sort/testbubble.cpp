@@ -1,143 +1,87 @@
-#include <iostream>
-#include <algorithm>
-#include <ctime>
-#include "SortTestHelper.h"
-#include "MergeSort.h"
-#include "InsertionSort.h"
+#include <stdio.h>
+void heap_sort(int *a,int n);
+void heapinsert(int *a,int heapsize);
+void heapify(int *a,int *heapsize);
+void swap(int *a,int *b);
 
-using namespace std;
+void heap_sort(int *a,int n){
+	int heapsize = 0;
+	for(;heapsize<n;heapsize++){
+		heapinsert(a,heapsize);  
+	}//形成一个大根堆
 
-
-// 对arr[l...r]部分进行partition操作
-// 返回p, 使得arr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
-template <typename T>
-int _partition(T arr[], int l, int r){
-
-    // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
-    swap( arr[l] , arr[rand()%(r-l+1)+l] );
-
-    T v = arr[l];
-    int j = l;
-    for( int i = l + 1 ; i <= r ; i ++ )
-        if( arr[i] < v ){
-            j ++;
-            swap( arr[j] , arr[i] );
-        }
-
-    swap( arr[l] , arr[j]);
-
-    return j;
+	heapify(a,&heapsize); 
 }
 
-// 双路快速排序的partition
-// 返回p, 使得arr[l...p-1] <= arr[p] ; arr[p+1...r] >= arr[p]
-// 双路快排处理的元素正好等于arr[p]的时候要注意，详见下面的注释：）
-template <typename T>
-int _partition2(T arr[], int l, int r){
-
-    // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
-    swap( arr[l] , arr[rand()%(r-l+1)+l] );
-    T v = arr[l];
-
-    // arr[l+1...i) <= v; arr(j...r] >= v
-    int i = l+1, j = r;
-    while( true ){
-        // 注意这里的边界, arr[i] < v, 不能是arr[i] <= v
-        // 思考一下为什么?
-        while( i <= r && arr[i] < v )
-            i ++;
-
-        // 注意这里的边界, arr[j] > v, 不能是arr[j] >= v
-        // 思考一下为什么?
-        while( j >= l+1 && arr[j] > v )
-            j --;
-
-        // 对于上面的两个边界的设定, 有的同学在课程的问答区有很好的回答:)
-        // 大家可以参考: http://coding.imooc.com/learn/questiondetail/4920.html
-
-        if( i > j )
-            break;
-
-        swap( arr[i] , arr[j] );
-        i ++;
-        j --;
-    }
-
-    swap( arr[l] , arr[j]);
-
-    return j;
+void heapinsert(int *a,int heapsize){
+	
+	int i = heapsize;
+	while(a[i] > a[(i-1)/2]){
+	    swap(&a[i],&a[(i-1)/2]);
+	    i = (i-1)/2;
+	}
 }
 
-// 对arr[l...r]部分进行快速排序
-template <typename T>
-void _quickSort(T arr[], int l, int r){
+void heapify(int *a,int *heapsize){
+	
+//这里需要注意，heapsize是堆中数目的个数，但不是堆中最后一个元素的下标
+//堆中最后一个元素下标为*heapsize-1	
+	while( (*heapsize)>0 ){
+		swap(&a[0],&a[(*heapsize)-1]); //交换堆中的根节点和最后一个子节点 
+		(*heapsize)--;
+		//整理heapsize的部分重新构成大根堆 
+		int i = 0;
+		while( (i*2+1)<=( *heapsize-1) ){   //判断是否有子节点 
+			if((i*2+2)<= *heapsize-1 )     //左右孩子都有 
+			{
+				    int temp = (a[i*2+1]>a[i*2+2])?i*2+1:i*2+2;
+			        if(a[i] < a[temp]){    //右孩子是否存在 ，找两者其中较大的一个 
+					    swap(&a[i],&a[temp]);
+				        i = temp;
+				    }
+				    else{
+				    	break;
+					} 
+			}
+			
+		    else{ //只有左孩子 
+			        if(a[i] < a[i*2+1]){    //没有右孩子的情况下，直接和左孩子进行比较
+				 	    swap(&a[i],&a[i*2+1]);
+				 	    i = i*2+1; 
+		            }
+		            else   //如果没有出现交换操作，说明已经到达了合适位置 
+			             break;	
+		    }
+	    }
+	} 
+} 
 
-    // 对于小规模数组, 使用插入排序进行优化
-    if( r - l <= 15 ){
-        insertionSort(arr,l,r);
-        return;
-    }
 
-    // 调用双路快速排序的partition
-    int p = _partition2(arr, l, r);
-    _quickSort(arr, l, p-1 );
-    _quickSort(arr, p+1, r);
+void swap(int *a,int *b){
+	int temp; 
+
+	temp = *a;
+	*a = *b; 
+	*b = temp;
+
 }
 
-template <typename T>
-void quickSort(T arr[], int n){
-
-    srand(time(NULL));
-    _quickSort(arr, 0, n-1);
+int main(){
+    int n;
+    printf("请输入数组长度：");
+    scanf("%d",&n);
+    
+	int a[n];
+    printf("请输入您想要进行排序的数：\n");
+    for(int i=0;i<n;i++){
+    	scanf("%d",&a[i]);
+	}
+	
+	heap_sort(a,n);
+	
+	for(int i=0;i<n;i++){
+    	printf("%d ",a[i]);
+	}
+	printf("\n");
 }
-
-
-// 比较Merge Sort和双路快速排序两种排序算法的性能效率
-int main() {
-
-    int n = 1000000;
-
-    // 测试1 一般性测试
-    cout<<"Test for random array, size = "<<n<<", random range [0, "<<n<<"]"<<endl;
-    int* arr1 = SortTestHelper::generateRandomArray(n,0,n);
-    int* arr2 = SortTestHelper::copyIntArray(arr1,n);
-
-    SortTestHelper::testSort("Merge Sort", mergeSort, arr1, n);
-    SortTestHelper::testSort("Quick Sort", quickSort, arr2, n);
-
-    delete[] arr1;
-    delete[] arr2;
-
-    cout<<endl;
-
-
-    // 测试2 测试近乎有序的数组
-    // 双路快速排序算法也可以轻松处理近乎有序的数组
-    int swapTimes = 100;
-    cout<<"Test for nearly ordered array, size = "<<n<<", swap time = "<<swapTimes<<endl;
-    arr1 = SortTestHelper::generateNearlyOrderedArray(n,swapTimes);
-    arr2 = SortTestHelper::copyIntArray(arr1, n);
-
-    SortTestHelper::testSort("Merge Sort", mergeSort, arr1, n);
-    SortTestHelper::testSort("Quick Sort", quickSort, arr2, n);
-
-    delete[] arr1;
-    delete[] arr2;
-
-    cout<<endl;
-
-
-    // 测试3 测试存在包含大量相同元素的数组
-    // 使用双快速排序后, 我们的快速排序算法可以轻松的处理包含大量元素的数组
-    cout<<"Test for random array, size = "<<n<<", random range [0,10]"<<endl;
-    arr1 = SortTestHelper::generateRandomArray(n,0,10);
-    arr2 = SortTestHelper::copyIntArray(arr1, n);
-
-    SortTestHelper::testSort("Merge Sort", mergeSort, arr1, n);
-    SortTestHelper::testSort("Quick Sort", quickSort, arr2, n);
-
-    delete[] arr1;
-    delete[] arr2;
-
-    return 0;
-}
+ 
