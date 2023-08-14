@@ -8,24 +8,7 @@
 #include <algorithm>
 using namespace std;
 
-void heap_sort(int arr[], int n);
-void heapinsert(int arr[], int heapsize);
-void heapify(int arr[], int* heapsize);
 
-void head_sort(int arr[], int n) {
-    int heapsize = 0;
-    for(; heapsize < n; heapsize++) {
-        heapinsert(arr, heapsize);
-    }
-    heapify(arr, &heapsize);
-}
-
-void heapinsert(int arr[], int heapsize) {
-    int i = heapsize;
-    while(arr[i] > arr[(i - 1)/2]) {
-        
-    }
-}
 
 void printArray(int arr[], int size)
 {
@@ -37,7 +20,10 @@ void printArray(int arr[], int size)
 int main() {
     int arr[] = {1,4,5,23,12,54,21,55,19};
     int n = sizeof(arr)/sizeof(int);
-    heap_sort(arr, 0, n - 1);
+
+
+
+
     printArray(arr, n);
     return 0;
 }
