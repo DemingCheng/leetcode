@@ -1,0 +1,29 @@
+预处理，编译，汇编，链接
+
+预处理：处理#开头的指令
+    1. 头文件 #include
+    2. 宏定义 #define
+    3. 条件编译 #ifdef
+
+编译：编译成汇编语言
+
+汇编：汇编成机器语言
+
+链接：链接动态链接库
+
+
+链接分类：静态链接和动态链接
+
+静态链接：程序运行前就将目标模块和所需的静态链接库链接成一个可执行文件。
+缺点是1. 浪费空间，每个可执行文件都有一个静态链接库的副本。2. 使用不灵活，修改静态链接库需要重新编译可执行文件。
+优点是执行速度快，因为可执行文件已经具备了所有所需的文件
+
+动态链接是装入或者运行的时候，边装入内存边链接或者边运行可执行文件边链接。（装入时动态链接，运行时动态链接）
+优点是有些模块根本就不会用到，比如错误处理模块。所以运行的时候再装入，可以节省内存空间。
+
+
+装入：虚拟地址到内存实际的物理地址映射。
+动态重定位的特点是可以将程序分配到不连续的存储区中；在程序运行之前可以只装入它的部分代码即可投入运行，然后在程序运行期间，根据需要动态申请分配内存；便于程序段的共享，可以向用户提供一个比存储空间大得多的地址空间。
+https://guisu.blog.csdn.net/article/details/5713099?spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-4-5713099-blog-93230532.235%5Ev38%5Epc_relevant_sort_base1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-4-5713099-blog-93230532.235%5Ev38%5Epc_relevant_sort_base1&utm_relevant_index=5
+
+

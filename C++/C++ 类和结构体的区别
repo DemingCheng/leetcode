@@ -1,3 +1,6 @@
+Struct 和 Class的区别
+1. 默认访问权限 和 2. 继承权限不同。
+
 1. 默认权限不同
 class默认访问权限是private
 struct默认访问权限是public
