@@ -18,67 +18,67 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 对arr[l...r]部分进行partition操作
-// 返回p, 使得arr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
-int partition(int arr[], int l, int r) {
-    swap(arr[l], arr[rand() % (r - l + 1) + l]);
-    int pvalue = arr[l];
+// 对nums[l...r]部分进行partition操作
+// 返回p, 使得nums[l...p-1] < nums[p] ; nums[p+1...r] > nums[p]
+int partition(int nums[], int l, int r) {
+    swap(nums[l], nums[rand() % (r - l + 1) + l]);
+    int pvalue = nums[l];
 
-    int j = l;
+    int j = l; 
     for(int i = l + 1; i <= r; ++i) {
-        if(arr[i] < pvalue) {
-            j++;
-            swap(arr[j], arr[i]);
+        if(nums[i] < pvalue) { 
+            j++; // 重点
+            swap(nums[j], nums[i]);
         }
     }
-    swap(arr[l], arr[j]);
+    swap(nums[l], nums[j]);
     return j;
 }
 
-int partition2(int arr[], int l, int r) {
-    swap(arr[l], arr[random()%(r - l + 1) + l]);
-    int pvalue = arr[l];
+int partition2(int nums[], int l, int r) {
+    swap(nums[l], nums[random()%(r - l + 1) + l]);
+    int pvalue = nums[l];
 
     int i = l + 1, j = r;
     while(true) {
-        while(i <= r && arr[i] < pvalue) {
+        while(i <= r && nums[i] < pvalue) {
             ++i;
         }
-        while(j >= l + 1 && arr[j] > pvalue) {
+        while(j >= l + 1 && nums[j] > pvalue) {
             --j;
         }
         if (i > j) break;
-        swap(arr[i], arr[j]);
+        swap(nums[i], nums[j]);
         ++i;
         --j;
     }
 
-    swap(arr[l], arr[j]);
+    swap(nums[l], nums[j]);
     return j;
 }
 
-void quick_sort(int arr[], int l, int r) {
+void quick_sort(int nums[], int l, int r) {
     if(l < r) {
-        int pivot = partition2(arr, l, r);
-        quick_sort(arr, l, pivot - 1);
-        quick_sort(arr, pivot + 1, r);
+        int pivot = partition2(nums, l, r);
+        quick_sort(nums, l, pivot - 1);
+        quick_sort(nums, pivot + 1, r);
     }
 }
 
-void printArray(int arr[], int size)
+void printnumsay(int nums[], int size)
 {
     int i;
     for (i = 0; i < size; i++)
-        cout << " " << arr[i];
+        cout << " " << nums[i];
 }
 
 int main() {
-    int arr[] = {32,43,2,4,6,3,1,7,35,213};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    int nums[] = {32,43,2,4,6,3,1,7,35,213};
+    int n = sizeof(nums) / sizeof(nums[0]);
 
-    quick_sort(arr, 0, n - 1);
+    quick_sort(nums, 0, n - 1);
 
-    printArray(arr, n);
+    printnumsay(nums, n);
     return 0;
 }
 
@@ -88,26 +88,26 @@ int main() {
 
 
 // 双路快速排序的partition
-// 返回p, 使得arr[l...p-1] <= arr[p] ; arr[p+1...r] >= arr[p]
-// 双路快排处理的元素正好等于arr[p]的时候要注意，详见下面的注释：）
+// 返回p, 使得nums[l...p-1] <= nums[p] ; nums[p+1...r] >= nums[p]
+// 双路快排处理的元素正好等于nums[p]的时候要注意，详见下面的注释：）
 template <typename T>
-int _partition2(T arr[], int l, int r){
+int _partition2(T nums[], int l, int r){
 
-    // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
-    swap( arr[l] , arr[rand()%(r-l+1)+l] );
-    T v = arr[l];
+    // 随机在nums[l...r]的范围中, 选择一个数值作为标定点pivot
+    swap( nums[l] , nums[rand()%(r-l+1)+l] );
+    T v = nums[l];
 
-    // arr[l+1...i) <= v; arr(j...r] >= v
+    // nums[l+1...i) <= v; nums(j...r] >= v
     int i = l+1, j = r;
     while( true ){
-        // 注意这里的边界, arr[i] < v, 不能是arr[i] <= v
+        // 注意这里的边界, nums[i] < v, 不能是nums[i] <= v
         // 思考一下为什么?
-        while( i <= r && arr[i] < v )
+        while( i <= r && nums[i] < v )
             i ++;
 
-        // 注意这里的边界, arr[j] > v, 不能是arr[j] >= v
+        // 注意这里的边界, nums[j] > v, 不能是nums[j] >= v
         // 思考一下为什么?
-        while( j >= l+1 && arr[j] > v )
+        while( j >= l+1 && nums[j] > v )
             j --;
 
         // 对于上面的两个边界的设定, 有的同学在课程的问答区有很好的回答:)
@@ -116,12 +116,12 @@ int _partition2(T arr[], int l, int r){
         if( i > j )
             break;
 
-        swap( arr[i] , arr[j] );
+        swap( nums[i] , nums[j] );
         i ++;
         j --;
     }
 
-    swap( arr[l] , arr[j]);
+    swap( nums[l] , nums[j]);
 
     return j;
 }

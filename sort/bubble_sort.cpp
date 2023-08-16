@@ -3,7 +3,7 @@ using namespace std;
 
 void bubble_sort(int array[], int n) {
     bool swapped;
-    for(int i = 0; i < n - 1; ++i) {
+    for(int i = 0; i < n - 1; ++i) { // *小于N - 1
         swapped = false;
         for(int j = 0; j < n - i - 1; ++j) {
             if (array[j] > array[j + 1]) {
@@ -25,7 +25,7 @@ void printArray(int arr[], int size)
 }
 
 int main() {
-    int array[] = {64, 34, 25, 12, 22, 11, 90};
+    int array[] = {64, 34, 25, 12, 22, 11, 90, 1};
     int N = sizeof(array) / sizeof(array[0]);
     bubble_sort(array, N);
     printArray(array, N);
