@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 bool is_little_endian() {
@@ -9,8 +9,19 @@ bool is_little_endian() {
     }
 }
 
+bool is_little_endian2() {
+    union {
+        int i,
+        char c,
+    }un;
+
+    int i = 1;
+    return un.c == 1;
+}
+
 int main() {
     cout << is_little_endian() << endl;
+    cout << is_little_endian2() << endl;
     return 0;
 }
 
