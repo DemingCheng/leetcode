@@ -28,6 +28,15 @@ __global__ void sumArraysOnDevice(float *A, float *B, float *C, const int N)
     }
 }
 
+__global__ void sumArraysParallel(float *A, float *B, float *C, const int N)
+{
+    int i = block.x * 
+    for (int i = 0; i < N; ++i)
+    {
+        C[i]=A[i]+B[i];
+    }
+}
+
 int main()
 {
     std::cout << "Hello, World!" << std::endl;

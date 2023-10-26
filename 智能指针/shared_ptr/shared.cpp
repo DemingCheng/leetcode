@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+// https://zhuanlan.zhihu.com/p/526147194
 
 void foo(std::shared_ptr<int> i) {
     (*i)++;
