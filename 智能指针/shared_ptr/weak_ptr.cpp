@@ -19,6 +19,13 @@ public:
 
     void use_B(shared_ptr<B> b) {
         this->_b = b;
+
+        // 在必要时候可以转换成共享指针
+        shared_ptr<B> sp;
+        sp = this->_b.lock();
+        cout << sp.use_count() << endl;
+        // 使用完毕后，再将shared_ptr置为NULL即可
+        sp = NULL;
     }
 
 private:

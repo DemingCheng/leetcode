@@ -31,6 +31,7 @@ public:
         cout << "3. 拷贝构造函数" << endl;
     }
     // 4. 拷贝赋值运算符
+    // 需要考虑自赋值和异常处理
     Student& operator=(const Student& other) {
 
     }
