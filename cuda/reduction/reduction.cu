@@ -50,7 +50,7 @@ __global__ void reduce1_1(float* d_in, float* d_out) {
     cache[tid] = d_in[i];
     __syncthreads();
     
-    for(unsigned int stride = blockDim.x / 2; stride > 0; stride >>= 2) {
+    for(unsigned int stride = blockDim.x / 2; stride > 0; stride >>= 1) {
         if(tid < stride) {
             cache[tid] += cache[tid + stride];
         }
