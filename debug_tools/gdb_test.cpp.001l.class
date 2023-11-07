@@ -1,0 +1,63 @@
+Class <unnamed struct>
+   size=8 align=4
+   base size=8 base align=4
+<unnamed struct> (0x0x7f7ca5cbb240) 0
+
+Class __locale_struct
+   size=232 align=8
+   base size=232 base align=8
+__locale_struct (0x0x7f7ca5cbb2a0) 0
+
+Class Empty
+   size=1 align=1
+   base size=0 base align=1
+Empty (0x0x7f7ca5cbb300) 0 empty
+
+Vtable for Base1
+Base1::_ZTV5Base1: 4 entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI5Base1)
+16    (int (*)(...))Base1::A
+24    (int (*)(...))Base1::B
+
+Class Base1
+   size=16 align=8
+   base size=16 base align=8
+Base1 (0x0x7f7ca5cbb360) 0
+    vptr=((& Base1::_ZTV5Base1) + 16)
+
+Vtable for Base2
+Base2::_ZTV5Base2: 4 entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI5Base2)
+16    (int (*)(...))Base2::C
+24    (int (*)(...))Base2::D
+
+Class Base2
+   size=16 align=8
+   base size=16 base align=8
+Base2 (0x0x7f7ca5cbb600) 0
+    vptr=((& Base2::_ZTV5Base2) + 16)
+
+Vtable for Derived
+Derived::_ZTV7Derived: 9 entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI7Derived)
+16    (int (*)(...))Derived::A
+24    (int (*)(...))Base1::B
+32    (int (*)(...))Derived::C
+40    (int (*)(...))-16
+48    (int (*)(...))(& _ZTI7Derived)
+56    (int (*)(...))Derived::_ZThn16_N7Derived1CEv
+64    (int (*)(...))Base2::D
+
+Class Derived
+   size=40 align=8
+   base size=40 base align=8
+Derived (0x0x7f7ca5cf7000) 0
+    vptr=((& Derived::_ZTV7Derived) + 16)
+  Base1 (0x0x7f7ca5cbb8a0) 0
+      primary-for Derived (0x0x7f7ca5cf7000)
+  Base2 (0x0x7f7ca5cbb900) 16
+      vptr=((& Derived::_ZTV7Derived) + 56)
+
